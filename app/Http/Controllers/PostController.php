@@ -39,7 +39,7 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            'user' => auth()->user()->id,
+            'user_id' => auth()->user()->id,
         ]);
 
         if ($post->save()) {
@@ -67,7 +67,7 @@ class PostController extends Controller
                     'title' => $post->title,
                     'description' => $post->description,
                     'publication_date' => $post->publication_date,
-                    'user' => 1
+                    'user_id' => 1
                 ]);
             }
             return $this->successResponse('Job\'s done', 200);
