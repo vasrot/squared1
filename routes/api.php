@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Auth
+Route::post('/register', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login']);
+
+// User
+Route::apiResource('user', UserController::class);
+Route::get('/user/{user}/posts', [UserController::class, 'posts']);
+
+// Posts
+Route::apiResource('post', PostController::class);
+
+// Import external posts
+Route::get('/import', [PostController::class, 'import']);
