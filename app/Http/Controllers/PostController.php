@@ -65,7 +65,7 @@ class PostController extends Controller
                 Post::create([
                     'title' => $post->title,
                     'description' => $post->description,
-
+                    'publication_date' => $post->publication_date
                 ]);
             }
         }

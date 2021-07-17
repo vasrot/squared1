@@ -18,6 +18,7 @@ class Post extends Model
         'title',
         'description',
         'user',
+        'publication_date',
     ];
 
     public function user() {
