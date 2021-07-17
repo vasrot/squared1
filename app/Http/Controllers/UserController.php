@@ -84,6 +84,7 @@ class UserController extends Controller
     }
 
     public function posts(Request $request, User $user) {
+        // We make sure that the requested posts are from the requesting user
         if ($user->id === auth()->user()->id) {
             return $this->showAll($user->posts);
         }
