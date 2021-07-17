@@ -49,11 +49,25 @@ class PostController extends Controller
         return $this->errorResponse('Post not saved', 500);
     }
 
+    /**
+     * Import posts from the given URL and save them under 'admin' user.
+     */
     public function import() {
+        $url = 'https://sq1-api-test.herokuapp.com/posts';
+
         $client = new Client();
-        $response = $client->request('GET', 'https://sq1-api-test.herokuapp.com/posts');
+        $response = $client->request('GET', $url);
         if ($response->getStatusCode()) {
-            dd(json_decode($response->getBody()));
+            $posts = json_decode($response->getBody());
+
+            // Save every post
+            foreach ($posts as $post) {
+                Post::create([
+                    'title' => $post->title,
+                    'description' => $post->description,
+
+                ]);
+            }
         }
 
         // $data = json_decode($countryJson, true);
