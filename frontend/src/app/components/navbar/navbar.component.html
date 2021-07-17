@@ -19,7 +19,7 @@
           <a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="'active'">Register</a>
         </li>
         <li *ngIf="is_auth" class="nav-item">
-          <a class="nav-link" (click)="logout()">Log out</a>
+          <a class="nav-link pointer" (click)="logout()">Log out</a>
         </li>
       </ul>
     </div>

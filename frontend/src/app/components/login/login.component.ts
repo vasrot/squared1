@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', response.token);
         localStorage.setItem('user_id', response.user.id);
         this.dataLoading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['private']);
       },
       error => {
         console.log(error);
