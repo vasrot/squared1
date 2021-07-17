@@ -61,20 +61,17 @@ class PostController extends Controller
             $posts = json_decode($response->getBody());
 
             // Save every post
-            foreach ($posts as $post) {
+            // User admin must be always ID=1, as it's the first user created in the database seeder file.
+            foreach ($posts->data as $post) {
                 Post::create([
                     'title' => $post->title,
                     'description' => $post->description,
-                    'publication_date' => $post->publication_date
+                    'publication_date' => $post->publication_date,
+                    'user' => 1
                 ]);
             }
+            return $this->successResponse('Job\'s done', 200);
         }
-
-        // $data = json_decode($countryJson, true);
-        // foreach ($data['countries'] as $obj) {
-        //     Country::create(array(
-        //       'country_name' => $obj['name'], 'iso_code' => $obj['sortname']
-        //       ));
-        // }
+        return $this->errorResponse('Something went wrong.', 500);
     }
 }
