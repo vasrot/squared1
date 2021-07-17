@@ -12,11 +12,14 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/private']" [routerLinkActive]="'active'">Private area</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!is_auth" class="nav-item">
           <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="'active'">Login</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="!is_auth" class="nav-item">
           <a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="'active'">Register</a>
+        </li>
+        <li *ngIf="is_auth" class="nav-item">
+          <a class="nav-link" (click)="logout()">Log out</a>
         </li>
       </ul>
     </div>
