@@ -1,1 +1,87 @@
-<p>private works!</p>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create a new post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="postForm" (ngSubmit)="post()">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" formControlName="title" placeholder="Title">
+            <label for="floatingInput">Title</label>
+          </div>
+          <br>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingDescription" formControlName="description" placeholder="Description">
+            <label for="floatingDescription">Description</label>
+          </div>
+          <br>
+          <button *ngIf="!dataLoading" class="w-100 btn btn-lg btn-primary" type="submit">Post</button>
+          <button *ngIf="dataLoading" class="w-100 btn btn-lg btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+          </button>
+          <div *ngIf="server_response !== ''" class="alert alert-danger" role="alert">
+            {{ server_response }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Private area</h1>
+        <div class="row">
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-primary" (click)="getPosts('sort_by_desc=publication_date')">
+              <i class="bi bi-sort-down"></i>Newest first
+            </button>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="bi bi-plus-circle"></i>Create a new post
+            </button>
+          </div>
+          <div class="col-lg-4">
+            <button type="button" class="btn btn-primary" (click)="getPosts('sort_by=publication_date')">
+              <i class="bi bi-sort-up"></i>Oldest first
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <ng-container *ngIf="posts?.data.length > 0">
+          <div *ngFor="let post of posts.data" class="col">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h2>{{ post.title }}</h2>
+                <p class="card-text">{{ post.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">{{ post.publication_date | date: 'short' }}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="posts?.data.length === 0">
+          <p>You don't have posts yet.</p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+</main>

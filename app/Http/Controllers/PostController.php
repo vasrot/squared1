@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -40,6 +41,7 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'user_id' => auth()->user()->id,
+            'publication_date' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
         if ($post->save()) {

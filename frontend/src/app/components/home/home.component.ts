@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPosts();
+    this.getPosts('sort_by_desc=publication_date');
   }
 
-  getPosts() {
-    this.postService.getPosts().subscribe(
+  getPosts(filter = '') {
+    this.postService.getPosts(filter).subscribe(
       response => {
         this.posts = response;
         console.log('Posts ->', this.posts);

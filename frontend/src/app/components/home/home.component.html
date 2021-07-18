@@ -3,7 +3,19 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Welcome</h1>
+        <h1 class="fw-light">Blog</h1>
+        <div class="row">
+          <div class="col-6">
+            <button type="button" class="btn btn-primary" (click)="getPosts('sort_by_desc=publication_date')">
+              <i class="bi bi-sort-down"></i>Newest first
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-primary" (click)="getPosts('sort_by=publication_date')">
+              <i class="bi bi-sort-up"></i>Oldest first
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>

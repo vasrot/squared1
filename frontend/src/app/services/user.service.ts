@@ -20,9 +20,9 @@ export class UserService {
    * @param user User id
    * @returns observable
    */
-  getPosts(user: number) {
+  getPosts(user: number, filter = '') {
     const headers = this.headers;
-    return this.http.get<any>(`${this.URL}/${user}/posts`, {
+    return this.http.get<any>(`${this.URL}/${user}/posts?${filter}`, {
       headers,
     });
   }
